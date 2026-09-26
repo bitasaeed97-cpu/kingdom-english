@@ -66,6 +66,7 @@ const ART = {
   castleColors: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#c9a8ff"/><polygon points="30,90 60,50 90,90" fill="#b083e0"/><polygon points="110,90 140,50 170,90" fill="#b083e0"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><path d="M55 95 A45 45 0 0 1 145 95" stroke="#ff8fd6" stroke-width="8" fill="none"/><path d="M63 95 A37 37 0 0 1 137 95" stroke="#ffc857" stroke-width="8" fill="none"/><path d="M71 95 A29 29 0 0 1 129 95" stroke="#7fe0c4" stroke-width="8" fill="none"/></svg>`,
   castleAnimals: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#ffd08a"/><polygon points="30,90 60,50 90,90" fill="#f0b95c"/><polygon points="110,90 140,50 170,90" fill="#f0b95c"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><circle cx="100" cy="75" r="20" fill="#c98a52"/><circle cx="84" cy="60" r="9" fill="#c98a52"/><circle cx="116" cy="60" r="9" fill="#c98a52"/><circle cx="93" cy="74" r="3" fill="#4a2f1c"/><circle cx="107" cy="74" r="3" fill="#4a2f1c"/><ellipse cx="100" cy="82" rx="5" ry="3" fill="#4a2f1c"/></svg>`,
   castleStory: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#b3a8ff"/><polygon points="30,90 60,50 90,90" fill="#9382e6"/><polygon points="110,90 140,50 170,90" fill="#9382e6"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><path d="M100 55 A20 20 0 1 0 100 95 A15 15 0 1 1 100 55Z" fill="#fff6c2"/></svg>`,
+  castleGreetings: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#ffd27a"/><polygon points="30,90 60,50 90,90" fill="#f0b854"/><polygon points="110,90 140,50 170,90" fill="#f0b854"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><circle cx="100" cy="68" r="18" fill="#ffe3cc"/><path d="M132 56 Q142 46 138 34" stroke="#ffe3cc" stroke-width="9" fill="none" stroke-linecap="round"/><circle cx="138" cy="32" r="6" fill="#ffe3cc"/></svg>`,
 
   // ---- daily routine scene icons (full-body girl doing a clear action) ----
   // Shared face pieces (hair, eyes, cheeks) are inlined per scene so each
@@ -195,6 +196,179 @@ const ART = {
     <path d="M64 116 q6 4 12 0" stroke="#5a3b78" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     <path d="M84 116 q6 4 12 0" stroke="#5a3b78" stroke-width="2.5" fill="none" stroke-linecap="round"/>
     <ellipse cx="76" cy="126" rx="6" ry="4" fill="#c76b8f"/>
+  `),
+
+  // ---- feelings (face-only, new vocabulary — how she looks/feels) ----
+  sceneHappy: () => card("#fff4c9", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="5" fill="#ffb6d9"/><circle cx="146" cy="82" r="5" fill="#ffb6d9"/>
+    <path d="M76 98 Q82 88 90 98" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M110 98 Q118 88 124 98" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="70" cy="118" r="8" fill="#ffb6d9" opacity=".8"/><circle cx="130" cy="118" r="8" fill="#ffb6d9" opacity=".8"/>
+    <path d="M72 122 Q100 148 128 122" stroke="#c76b8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M72 122 Q100 138 128 122 Q100 132 72 122Z" fill="#fff"/>
+    <polygon points="40,50 44,58 52,60 44,62 40,70 36,62 28,60 36,58" fill="#ffc857"/>
+    <polygon points="164,66 167,72 173,74 167,76 164,82 161,76 155,74 161,72" fill="#ffc857"/>
+  `),
+  sceneSad: () => card("#cde3ff", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <path d="M78 92 Q86 86 94 92" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M106 92 Q114 86 122 92" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="86" cy="102" r="6" fill="#5a3b78"/><circle cx="114" cy="102" r="6" fill="#5a3b78"/>
+    <ellipse cx="88" cy="118" rx="6" ry="10" fill="#5b9bff"/>
+    <ellipse cx="86" cy="112" rx="4" ry="6" fill="#a8ccff"/>
+    <path d="M84 138 Q100 128 116 138" stroke="#c76b8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+  `),
+  sceneTired: () => card("#e3d9ff", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <path d="M76 104 q10 8 20 0" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M104 104 q10 8 20 0" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <circle cx="72" cy="118" r="7" fill="#ffb6d9" opacity=".6"/><circle cx="128" cy="118" r="7" fill="#ffb6d9" opacity=".6"/>
+    <ellipse cx="100" cy="134" rx="10" ry="8" fill="#c76b8f"/>
+    <text x="128" y="56" font-family="Baloo 2, sans-serif" font-size="18" font-weight="800" fill="#b47cff">Zz</text>
+  `),
+  sceneHungry: () => card("#ffd9a8", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <circle cx="82" cy="98" r="8" fill="#5a3b78"/><circle cx="118" cy="98" r="8" fill="#5a3b78"/>
+    <circle cx="79" cy="94" r="2.6" fill="#fff"/><circle cx="115" cy="94" r="2.6" fill="#fff"/>
+    <path d="M70 88 q12 -8 24 0" stroke="#5a3b78" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M106 88 q12 -8 24 0" stroke="#5a3b78" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="100" cy="128" rx="18" ry="16" fill="#7a4a2d"/>
+    <ellipse cx="100" cy="130" rx="13" ry="11" fill="#fff"/>
+  `),
+  sceneSurprised: () => card("#ffe0f0", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <circle cx="82" cy="100" r="11" fill="#fff"/><circle cx="118" cy="100" r="11" fill="#fff"/>
+    <circle cx="82" cy="100" r="7" fill="#5a3b78"/><circle cx="118" cy="100" r="7" fill="#5a3b78"/>
+    <circle cx="79" cy="96" r="2.6" fill="#fff"/><circle cx="115" cy="96" r="2.6" fill="#fff"/>
+    <path d="M70 78 q12 -10 24 -2" stroke="#5a3b78" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M106 76 q12 -10 24 2" stroke="#5a3b78" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="100" cy="130" rx="9" ry="10" fill="#c76b8f"/>
+    <circle cx="58" cy="128" r="9" fill="#ffe3cc"/><circle cx="142" cy="128" r="9" fill="#ffe3cc"/>
+  `),
+  sceneScared: () => card("#e0e0ff", `
+    <circle cx="100" cy="104" r="46" fill="#ffe3cc"/>
+    <path d="M56 96 Q52 52 100 50 Q148 52 144 96 Q150 72 138 58 Q128 46 100 46 Q72 46 62 58 Q50 72 56 96Z" fill="#7a4a2d"/>
+    <circle cx="54" cy="82" r="14" fill="#7a4a2d"/><circle cx="146" cy="82" r="14" fill="#7a4a2d"/>
+    <circle cx="82" cy="100" r="10" fill="#fff"/><circle cx="118" cy="100" r="10" fill="#fff"/>
+    <circle cx="82" cy="100" r="4.5" fill="#5a3b78"/><circle cx="118" cy="100" r="4.5" fill="#5a3b78"/>
+    <path d="M72 84 L92 90 M128 84 L108 90" stroke="#5a3b78" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M86 132 Q92 126 98 132 Q104 138 110 132 Q116 126 114 132" stroke="#c76b8f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M40 130 Q34 110 46 96" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <path d="M160 130 Q166 110 154 96" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <circle cx="46" cy="94" r="8" fill="#ffe3cc"/><circle cx="154" cy="94" r="8" fill="#ffe3cc"/>
+  `),
+
+  // ---- greeting conversation (full-body gesture scenes) ----
+  sceneHello: () => card("#e0f7ff", `
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="128" width="48" height="46" rx="16" fill="#ff8fd6"/>
+    <path d="M78 132 Q56 112 60 76" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="60" cy="72" r="9" fill="#ffe3cc"/>
+    <path d="M122 132 Q140 128 136 114" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <circle cx="88" cy="98" r="6" fill="#5a3b78"/><circle cx="112" cy="98" r="6" fill="#5a3b78"/>
+    <circle cx="86" cy="95" r="2" fill="#fff"/><circle cx="110" cy="95" r="2" fill="#fff"/>
+    <path d="M76 122 Q100 148 124 122" stroke="#c76b8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M30 58 Q40 66 30 76 M24 70 Q34 78 24 88" stroke="#ffc857" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+  `),
+  sceneHowAreYou: () => card("#e8f5e0", `
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="128" width="48" height="46" rx="16" fill="#8fd3ff"/>
+    <path d="M78 132 Q52 128 52 100" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M122 132 Q148 128 148 100" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="52" cy="96" r="9" fill="#ffe3cc"/><circle cx="148" cy="96" r="9" fill="#ffe3cc"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <circle cx="88" cy="100" r="6" fill="#5a3b78"/><circle cx="112" cy="100" r="6" fill="#5a3b78"/>
+    <path d="M80 84 q8 -6 16 0" stroke="#5a3b78" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="100" cy="122" rx="8" ry="7" fill="#c76b8f"/>
+    <text x="140" y="50" font-family="Baloo 2, sans-serif" font-size="30" font-weight="800" fill="#b47cff">?</text>
+  `),
+  sceneImHappy: () => card("#fff4c9", `
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="128" width="48" height="46" rx="16" fill="#ffc857"/>
+    <path d="M78 132 Q54 110 58 74" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M122 132 Q146 110 142 74" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="58" cy="70" r="9" fill="#ffe3cc"/><circle cx="142" cy="70" r="9" fill="#ffe3cc"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <path d="M78 94 Q86 84 94 94" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M106 94 Q114 84 122 94" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M76 116 Q100 138 124 116" stroke="#c76b8f" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="66" cy="112" r="7" fill="#ffb6d9" opacity=".8"/><circle cx="134" cy="112" r="7" fill="#ffb6d9" opacity=".8"/>
+  `),
+  sceneNiceToMeet: () => card("#e0f0ff", `
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="128" width="48" height="46" rx="16" fill="#7fe0c4"/>
+    <path d="M122 138 Q158 132 172 116" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="176" cy="112" r="10" fill="#ffe3cc"/>
+    <path d="M78 132 Q60 128 62 108" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <circle cx="88" cy="100" r="6" fill="#5a3b78"/><circle cx="112" cy="100" r="6" fill="#5a3b78"/>
+    <circle cx="86" cy="97" r="2" fill="#fff"/><circle cx="110" cy="97" r="2" fill="#fff"/>
+    <path d="M84 120 Q100 132 116 120" stroke="#c76b8f" stroke-width="4" fill="none" stroke-linecap="round"/>
+  `),
+  sceneGoodbye: () => card("#ffdcec", `
+    <circle cx="150" cy="46" r="24" fill="#ffc857" opacity=".8"/>
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="128" width="48" height="46" rx="16" fill="#b47cff"/>
+    <path d="M122 132 Q144 116 138 82" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="138" cy="78" r="9" fill="#ffe3cc"/>
+    <path d="M78 132 Q58 128 60 112" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <path d="M80 96 Q88 90 96 96" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M104 96 Q112 90 120 96" stroke="#5a3b78" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M80 118 Q100 134 120 118" stroke="#c76b8f" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M156 62 Q166 68 156 76 M150 72 Q160 78 150 86" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".9"/>
+  `),
+
+  // ---- reward illustration for the greetings castle ----
+  prizeFriendship: () => card("#fff0e0", `
+    <ellipse cx="100" cy="176" rx="76" ry="14" fill="#b47cff" opacity=".15"/>
+    <path d="M40 172 L40 130" stroke="#ffe3cc" stroke-width="13" stroke-linecap="round"/>
+    <path d="M62 172 L62 130" stroke="#ffe3cc" stroke-width="13" stroke-linecap="round"/>
+    <rect x="30" y="100" width="44" height="42" rx="15" fill="#ff8fd6"/>
+    <circle cx="52" cy="78" r="26" fill="#ffe3cc"/>
+    <path d="M28 74 Q25 46 52 44 Q79 46 76 74 Q82 58 73 50 Q65 40 52 40 Q39 40 31 50 Q22 58 28 74Z" fill="#7a4a2d"/>
+    <circle cx="44" cy="80" r="5" fill="#5a3b78"/><circle cx="60" cy="80" r="5" fill="#5a3b78"/>
+    <path d="M42 92 Q52 100 62 92" stroke="#c76b8f" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M74 112 L98 100" stroke="#ffe3cc" stroke-width="12" stroke-linecap="round"/>
+    <path d="M138 106 L120 100" stroke="#fff8ff" stroke-width="12" stroke-linecap="round"/>
+    <ellipse cx="109" cy="103" rx="11" ry="9" fill="#ffe3cc"/>
+    <path d="M138 168 L138 128" stroke="#fff8ff" stroke-width="14" stroke-linecap="round"/>
+    <path d="M162 168 L162 128" stroke="#fff8ff" stroke-width="14" stroke-linecap="round"/>
+    <ellipse cx="150" cy="126" rx="34" ry="38" fill="#fff8ff"/>
+    <polygon points="150,64 158,96 142,96" fill="#ffc857" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="138" cy="118" r="6" fill="#5a3b78"/><circle cx="162" cy="118" r="6" fill="#5a3b78"/>
+    <path d="M140 134 Q150 140 160 134" stroke="#e07ab0" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <circle cx="128" cy="128" r="5" fill="#ffb6d9" opacity=".8"/><circle cx="172" cy="128" r="5" fill="#ffb6d9" opacity=".8"/>
+    <path d="M118 92 Q100 82 88 96" stroke="#b47cff" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <polygon points="30,24 34,32 42,34 34,36 30,44 26,36 18,34 26,32" fill="#fff6c2"/>
+    <polygon points="170,30 173,36 179,38 173,40 170,46 167,40 161,38 167,36" fill="#fff6c2"/>
   `),
 
   // ---- family portraits ----
