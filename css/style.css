@@ -381,8 +381,8 @@ button:active { transform: translateY(3px); }
   touch-action: none;
 }
 .order-card svg { width: 100%; height: 100%; }
-.order-card.dragging { opacity: .35; }
 .order-card.placed { visibility: hidden; }
+.drag-active { box-shadow: 0 12px 18px rgba(90,59,120,.35); }
 
 /* jigsaw */
 .jigsaw-board {
@@ -397,6 +397,23 @@ button:active { transform: translateY(3px); }
   position: absolute;
   border: 2px dashed rgba(180,124,255,.5);
   border-radius: 6px;
+}
+.jigsaw-badge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--purple-dark);
+  font-weight: 800;
+  font-size: .72rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 0 rgba(154,96,180,.3);
+  pointer-events: none;
 }
 .jigsaw-piece {
   position: absolute;
@@ -414,8 +431,9 @@ button:active { transform: translateY(3px); }
   max-width: 360px;
 }
 .jigsaw-piece-tray {
-  width: 70px;
-  height: 70px;
+  position: relative;
+  width: 78px;
+  height: 78px;
   border-radius: 8px;
   box-shadow: 0 4px 0 rgba(154,96,180,.3);
   touch-action: none;

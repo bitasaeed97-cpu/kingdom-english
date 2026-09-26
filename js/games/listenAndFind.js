@@ -39,7 +39,7 @@ export function renderListenAndFind(stage, { unit, game, setProgress, onComplete
   }
 
   function speakRound(round) {
-    mascotSay("round-" + round.correct, round.text);
+    mascotSay("round-" + round.correct, round.text, { repeat: true });
   }
 
   function onPick(card, key, round) {

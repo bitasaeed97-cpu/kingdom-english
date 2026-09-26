@@ -1,4 +1,4 @@
-const CACHE_NAME = "kingdom-english-v3";
+const CACHE_NAME = "kingdom-english-v4";
 
 const PRECACHE_URLS = [
   "./",
@@ -12,6 +12,7 @@ const PRECACHE_URLS = [
   "./js/mascot.js",
   "./js/state.js",
   "./js/utils.js",
+  "./js/drag.js",
   "./js/data/castles.js",
   "./js/data/registry.js",
   "./js/data/units/dailyRoutine.js",

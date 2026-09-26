@@ -3,6 +3,7 @@ import { shuffle } from "../utils.js";
 import { Sfx } from "../audio.js";
 import { Fx } from "../effects.js";
 import { mascotSay } from "../mascot.js";
+import { makeDraggable } from "../drag.js";
 
 export function renderListenAndOrder(stage, { unit, game, setProgress, onComplete }) {
   const steps = game.steps;
@@ -44,54 +45,23 @@ export function renderListenAndOrder(stage, { unit, game, setProgress, onComplet
   }
 
   function wireDrag(card, step) {
-    let ghost = null;
-    let startX = 0, startY = 0;
-
-    card.addEventListener("pointerdown", (e) => {
-      if (card.classList.contains("placed")) return;
-      e.preventDefault();
-      const rect = card.getBoundingClientRect();
-      startX = rect.left;
-      startY = rect.top;
-      ghost = card.cloneNode(true);
-      ghost.style.position = "fixed";
-      ghost.style.left = rect.left + "px";
-      ghost.style.top = rect.top + "px";
-      ghost.style.width = rect.width + "px";
-      ghost.style.height = rect.height + "px";
-      ghost.style.zIndex = "200";
-      ghost.style.pointerEvents = "none";
-      ghost.style.transform = "scale(1.08)";
-      document.body.appendChild(ghost);
-      card.classList.add("dragging");
-
-      const onMove = (ev) => {
-        const dx = ev.clientX - e.clientX;
-        const dy = ev.clientY - e.clientY;
-        ghost.style.left = startX + dx + "px";
-        ghost.style.top = startY + dy + "px";
-      };
-      const onUp = (ev) => {
-        document.removeEventListener("pointermove", onMove);
-        document.removeEventListener("pointerup", onUp);
-        const target = document.elementFromPoint(ev.clientX, ev.clientY);
+    makeDraggable(card, {
+      canDrag: () => !card.classList.contains("placed"),
+      onDrop: (target, restore) => {
         const slot = target?.closest(".order-slot");
-        ghost.remove();
-        ghost = null;
-        card.classList.remove("dragging");
-        handleDrop(card, step, slot);
-      };
-      document.addEventListener("pointermove", onMove);
-      document.addEventListener("pointerup", onUp);
+        handleDrop(card, step, slot, restore);
+      },
     });
   }
 
-  function handleDrop(card, step, slot) {
+  function handleDrop(card, step, slot, restore) {
     if (!slot || slot.classList.contains("filled")) {
+      restore();
       return;
     }
     const slotIndex = Number(slot.dataset.index);
     if (slotIndex !== step.stepIndex) {
+      restore();
       Sfx.wrong();
       slot.animate(
         [{ transform: "translateX(0)" }, { transform: "translateX(-6px)" }, { transform: "translateX(6px)" }, { transform: "translateX(0)" }],
@@ -99,6 +69,7 @@ export function renderListenAndOrder(stage, { unit, game, setProgress, onComplet
       );
       return;
     }
+    restore();
     Sfx.correct();
     slot.classList.add("filled");
     slot.innerHTML = ART[unit.vocab[step.key].art]();
@@ -107,7 +78,7 @@ export function renderListenAndOrder(stage, { unit, game, setProgress, onComplet
     setProgress(filledCount, steps.length);
     const r = slot.getBoundingClientRect();
     Fx.sparkleAt(r.left + r.width / 2, r.top + r.height / 2);
-    mascotSay("order-step-" + step.key, step.text);
+    mascotSay("order-step-" + step.key, step.text, { repeat: true });
 
     if (filledCount >= steps.length) {
       setTimeout(() => {

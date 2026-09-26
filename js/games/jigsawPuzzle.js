@@ -3,10 +3,11 @@ import { shuffle } from "../utils.js";
 import { Sfx } from "../audio.js";
 import { Fx } from "../effects.js";
 import { mascotSay } from "../mascot.js";
+import { makeDraggable } from "../drag.js";
 
 export function renderJigsaw(stage, { game, setProgress, onComplete }) {
   const grid = game.grid;
-  const boardSize = Math.min(340, window.innerWidth * 0.72);
+  const boardSize = Math.min(320, window.innerWidth * 0.7);
   const cell = boardSize / grid;
   const svg = ART[game.image]();
   const dataUri = "data:image/svg+xml," + encodeURIComponent(svg);
@@ -25,9 +26,13 @@ export function renderJigsaw(stage, { game, setProgress, onComplete }) {
   const board = stage.querySelector("#board");
   const tray = stage.querySelector("#tray");
 
+  // Numbered badges give her an actual matching strategy (find "3", find
+  // slot "3") instead of blind trial and error — flat-colored regions of
+  // the picture (sky, background) look nearly identical piece to piece.
   const pieces = [];
   for (let r = 0; r < grid; r++) {
     for (let c = 0; c < grid; c++) {
+      const num = r * grid + c + 1;
       const slot = document.createElement("div");
       slot.className = "jigsaw-slot";
       slot.style.left = c * cell + "px";
@@ -36,12 +41,13 @@ export function renderJigsaw(stage, { game, setProgress, onComplete }) {
       slot.style.height = cell + "px";
       slot.dataset.r = r;
       slot.dataset.c = c;
+      slot.innerHTML = `<span class="jigsaw-badge">${num}</span>`;
       board.appendChild(slot);
-      pieces.push({ r, c });
+      pieces.push({ r, c, num });
     }
   }
 
-  shuffle(pieces).forEach(({ r, c }) => {
+  shuffle(pieces).forEach(({ r, c, num }) => {
     const piece = document.createElement("div");
     piece.className = "jigsaw-piece-tray";
     piece.style.backgroundImage = `url('${dataUri}')`;
@@ -49,6 +55,7 @@ export function renderJigsaw(stage, { game, setProgress, onComplete }) {
     piece.style.backgroundPosition = `-${c * cell}px -${r * cell}px`;
     piece.dataset.r = r;
     piece.dataset.c = c;
+    piece.innerHTML = `<span class="jigsaw-badge">${num}</span>`;
     tray.appendChild(piece);
     wireDrag(piece, r, c);
   });
@@ -58,49 +65,19 @@ export function renderJigsaw(stage, { game, setProgress, onComplete }) {
   mascotSay("jigsaw-intro", game.intro);
 
   function wireDrag(piece, r, c) {
-    let ghost = null;
-
-    piece.addEventListener("pointerdown", (e) => {
-      e.preventDefault();
-      const rect = piece.getBoundingClientRect();
-      const startX = rect.left;
-      const startY = rect.top;
-      ghost = piece.cloneNode(true);
-      ghost.style.position = "fixed";
-      ghost.style.left = startX + "px";
-      ghost.style.top = startY + "px";
-      ghost.style.width = rect.width + "px";
-      ghost.style.height = rect.height + "px";
-      ghost.style.zIndex = "200";
-      ghost.style.pointerEvents = "none";
-      ghost.style.transform = "scale(1.1)";
-      document.body.appendChild(ghost);
-      piece.style.visibility = "hidden";
-
-      const onMove = (ev) => {
-        ghost.style.left = startX + (ev.clientX - e.clientX) + "px";
-        ghost.style.top = startY + (ev.clientY - e.clientY) + "px";
-      };
-      const onUp = (ev) => {
-        document.removeEventListener("pointermove", onMove);
-        document.removeEventListener("pointerup", onUp);
-        const target = document.elementFromPoint(ev.clientX, ev.clientY);
+    makeDraggable(piece, {
+      canDrag: () => piece.isConnected,
+      onDrop: (target, restore) => {
         const slot = target?.closest(".jigsaw-slot");
-        ghost.remove();
-        ghost = null;
-        handleDrop(piece, r, c, slot);
-      };
-      document.addEventListener("pointermove", onMove);
-      document.addEventListener("pointerup", onUp);
+        handleDrop(piece, r, c, slot, restore);
+      },
     });
   }
 
-  function handleDrop(piece, r, c, slot) {
+  function handleDrop(piece, r, c, slot, restore) {
     if (!slot || slot.classList.contains("filled") || Number(slot.dataset.r) !== r || Number(slot.dataset.c) !== c) {
-      piece.style.visibility = "visible";
-      if (slot) {
-        Sfx.wrong();
-      }
+      restore();
+      if (slot) Sfx.wrong();
       return;
     }
     slot.classList.add("filled");
@@ -108,6 +85,7 @@ export function renderJigsaw(stage, { game, setProgress, onComplete }) {
     slot.style.backgroundSize = `${boardSize}px ${boardSize}px`;
     slot.style.backgroundPosition = `-${c * cell}px -${r * cell}px`;
     slot.style.border = "none";
+    slot.innerHTML = "";
     piece.remove();
     placed++;
     setProgress(placed, total);

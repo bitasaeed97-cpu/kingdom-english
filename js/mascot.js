@@ -22,15 +22,16 @@ export function initMascot() {
   });
 }
 
-export function mascotSay(lineId, text, { showBubble = true, bubbleText, onEnd } = {}) {
+export function mascotSay(lineId, text, { showBubble = true, bubbleText, repeat = false, onEnd } = {}) {
   if (showBubble) {
     const shown = bubbleText ?? text;
     bubbleEl.textContent = shown;
     bubbleEl.classList.add("show");
     clearTimeout(bubbleTimer);
-    bubbleTimer = setTimeout(() => bubbleEl.classList.remove("show"), Math.max(2600, shown.length * 90));
+    const duration = Math.max(2600, shown.length * 90) * (repeat ? 2 : 1);
+    bubbleTimer = setTimeout(() => bubbleEl.classList.remove("show"), duration);
   }
-  Narrator.say(lineId, text, { onEnd });
+  Narrator.say(lineId, text, { repeat, onEnd });
 }
 
 export function hideBubble() {

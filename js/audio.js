@@ -16,6 +16,7 @@ let talkingListeners = [];
 function pickVoice() {
   const voices = window.speechSynthesis?.getVoices() || [];
   englishVoice =
+    voices.find((v) => /en-US/i.test(v.lang) && /google us english/i.test(v.name)) ||
     voices.find((v) => /en-US/i.test(v.lang) && /female|samantha|zira|susan/i.test(v.name)) ||
     voices.find((v) => /en-US/i.test(v.lang)) ||
     voices.find((v) => /^en/i.test(v.lang)) ||
@@ -32,27 +33,56 @@ function setTalking(on) {
   talkingListeners.forEach((fn) => fn(on));
 }
 
-function speak(text, { rate = 0.92, pitch = 1.25, onEnd } = {}) {
-  if (!("speechSynthesis" in window)) {
-    onEnd?.();
-    return;
-  }
-  window.speechSynthesis.cancel();
+function makeUtterance(text, rate, pitch) {
   const utter = new SpeechSynthesisUtterance(text);
   utter.lang = "en-US";
   utter.rate = rate;
   utter.pitch = pitch;
   if (englishVoice) utter.voice = englishVoice;
-  utter.onstart = () => setTalking(true);
-  utter.onend = () => {
-    setTalking(false);
+  return utter;
+}
+
+// Slow and clear by default — she's a 3-5yo hearing English as a second
+// language, not a fluent adult listener. `repeat: true` says the phrase
+// twice with a short pause, which helps new vocabulary actually land instead
+// of washing past on a single quick pass.
+function speak(text, { rate = 0.68, pitch = 1.15, repeat = false, onEnd } = {}) {
+  if (!("speechSynthesis" in window)) {
     onEnd?.();
-  };
-  utter.onerror = () => {
-    setTalking(false);
-    onEnd?.();
-  };
-  window.speechSynthesis.speak(utter);
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const first = makeUtterance(text, rate, pitch);
+  first.onstart = () => setTalking(true);
+  if (repeat) {
+    const second = makeUtterance(text, rate, pitch);
+    second.onend = () => {
+      setTalking(false);
+      onEnd?.();
+    };
+    second.onerror = () => {
+      setTalking(false);
+      onEnd?.();
+    };
+    first.onend = () => {
+      setTalking(false);
+      setTimeout(() => {
+        setTalking(true);
+        window.speechSynthesis.speak(second);
+      }, 500);
+    };
+    first.onerror = first.onend;
+  } else {
+    first.onend = () => {
+      setTalking(false);
+      onEnd?.();
+    };
+    first.onerror = () => {
+      setTalking(false);
+      onEnd?.();
+    };
+  }
+  window.speechSynthesis.speak(first);
 }
 
 function playFile(src, { onEnd } = {}) {
