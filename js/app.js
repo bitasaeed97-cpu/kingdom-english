@@ -48,17 +48,19 @@ function goGame(castleId, gameId) {
         const color = JEWEL_COLORS[Store.jewels().length % JEWEL_COLORS.length];
         const jewel = { id: `${cId}-${gId}-${Date.now()}`, castleId: cId, color };
         Store.addJewel(jewel);
-        goReward(cId, jewel);
+        goReward(cId, jewel, false);
       } else {
-        goCastle(cId);
+        // Replaying an already-finished game still needs a payoff — she
+        // shouldn't get dumped back to the castle screen with no reaction.
+        goReward(cId, null, true);
       }
     },
   });
   showScreen("game");
 }
 
-function goReward(castleId, jewel) {
-  renderReward(screens.reward, { jewel, onContinue: () => goCastle(castleId) });
+function goReward(castleId, jewel, isReplay) {
+  renderReward(screens.reward, { jewel, isReplay, onContinue: () => goCastle(castleId) });
   showScreen("reward");
 }
 

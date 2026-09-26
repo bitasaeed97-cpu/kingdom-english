@@ -67,51 +67,134 @@ const ART = {
   castleAnimals: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#ffd08a"/><polygon points="30,90 60,50 90,90" fill="#f0b95c"/><polygon points="110,90 140,50 170,90" fill="#f0b95c"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><circle cx="100" cy="75" r="20" fill="#c98a52"/><circle cx="84" cy="60" r="9" fill="#c98a52"/><circle cx="116" cy="60" r="9" fill="#c98a52"/><circle cx="93" cy="74" r="3" fill="#4a2f1c"/><circle cx="107" cy="74" r="3" fill="#4a2f1c"/><ellipse cx="100" cy="82" rx="5" ry="3" fill="#4a2f1c"/></svg>`,
   castleStory: () => `<svg viewBox="0 0 200 200"><rect x="40" y="90" width="120" height="80" rx="10" fill="#b3a8ff"/><polygon points="30,90 60,50 90,90" fill="#9382e6"/><polygon points="110,90 140,50 170,90" fill="#9382e6"/><rect x="85" y="120" width="30" height="50" rx="6" fill="#fff"/><path d="M100 55 A20 20 0 1 0 100 95 A15 15 0 1 1 100 55Z" fill="#fff6c2"/></svg>`,
 
-  // ---- daily routine scene icons (girl doing an action) ----
+  // ---- daily routine scene icons (full-body girl doing a clear action) ----
+  // Shared face pieces (hair, eyes, cheeks) are inlined per scene so each
+  // pose's arms/props/props can be hand-fit around the body without transform
+  // math — every scene shows the WHOLE body so the action reads at a glance.
   sceneWakeUp: () => card("#fff1c2", `
-    <circle cx="150" cy="45" r="26" fill="#ffdb70"/>
-    <rect x="40" y="120" width="120" height="40" rx="10" fill="#ff8fd6"/>
-    <rect x="40" y="105" width="40" height="24" rx="8" fill="#fff"/>
-    <g transform="translate(58 60) scale(0.6)">${girlHead("happy")}</g>
-    <path d="M120 100 L132 88 M126 100 L140 92 M132 106 L146 100" stroke="#ffb84d" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="156" cy="42" r="22" fill="#ffdb70"/>
+    <g stroke="#ffdb70" stroke-width="4" stroke-linecap="round"><line x1="156" y1="10" x2="156" y2="18"/><line x1="184" y1="42" x2="192" y2="42"/><line x1="134" y1="20" x2="140" y2="26"/></g>
+    <rect x="30" y="150" width="140" height="16" rx="8" fill="#e0579f"/>
+    <rect x="30" y="112" width="140" height="46" rx="14" fill="#ff8fd6"/>
+    <rect x="30" y="100" width="50" height="24" rx="10" fill="#fff8ff"/>
+    <path d="M76 118 Q54 96 58 62" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M124 118 Q146 96 142 62" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="58" cy="58" r="8" fill="#ffe3cc"/>
+    <circle cx="142" cy="58" r="8" fill="#ffe3cc"/>
+    <ellipse cx="100" cy="122" rx="34" ry="10" fill="#ffe3cc"/>
+    <circle cx="100" cy="92" r="32" fill="#ffe3cc"/>
+    <path d="M68 88 Q64 56 100 54 Q136 56 132 88 Q138 70 128 60 Q118 48 100 48 Q82 48 72 60 Q62 70 68 88Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="80" r="10" fill="#7a4a2d"/><circle cx="134" cy="80" r="10" fill="#7a4a2d"/>
+    <circle cx="66" cy="80" r="4" fill="#ffb6d9"/><circle cx="134" cy="80" r="4" fill="#ffb6d9"/>
+    <circle cx="86" cy="92" r="6" fill="#5a3b78"/><circle cx="114" cy="92" r="6" fill="#5a3b78"/>
+    <circle cx="84" cy="89" r="2" fill="#fff"/><circle cx="112" cy="89" r="2" fill="#fff"/>
+    <circle cx="76" cy="102" r="5" fill="#ffb6d9" opacity=".7"/><circle cx="124" cy="102" r="5" fill="#ffb6d9" opacity=".7"/>
+    <ellipse cx="100" cy="110" rx="7" ry="6" fill="#c76b8f"/>
   `),
-  sceneBreakfast: () => card("#ffe3cc", `
-    <g transform="translate(20 30) scale(0.8)">${girlHead("happy")}</g>
-    <ellipse cx="100" cy="168" rx="52" ry="14" fill="#fff"/>
-    <circle cx="100" cy="160" r="26" fill="#fff8ea"/>
-    <circle cx="100" cy="160" r="16" fill="#ffd27a"/>
-    <rect x="140" y="150" width="8" height="24" rx="4" fill="#b47cff"/>
+  sceneBreakfast: () => card("#fff4d6", `
+    <rect x="20" y="172" width="160" height="14" rx="6" fill="#c98a52"/>
+    <ellipse cx="72" cy="168" rx="30" ry="12" fill="#fff8ea"/>
+    <ellipse cx="72" cy="166" rx="21" ry="8" fill="#ffd27a"/>
+    <path d="M56 150 q4 -10 0 -18 M70 150 q4 -12 0 -20 M84 150 q4 -10 0 -18" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+    <rect x="76" y="128" width="48" height="48" rx="16" fill="#ff8fd6"/>
+    <path d="M122 132 Q142 122 138 100" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="138" cy="98" r="8" fill="#ffe3cc"/>
+    <rect x="128" y="72" width="9" height="30" rx="4" fill="#b47cff" transform="rotate(18 132 100)"/>
+    <ellipse cx="130" cy="70" rx="7" ry="9" fill="#b47cff" transform="rotate(18 132 100)"/>
+    <circle cx="100" cy="98" r="32" fill="#ffe3cc"/>
+    <path d="M68 94 Q64 62 100 60 Q136 62 132 94 Q138 76 128 66 Q118 54 100 54 Q82 54 72 66 Q62 76 68 94Z" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="10" fill="#7a4a2d"/><circle cx="134" cy="86" r="10" fill="#7a4a2d"/>
+    <circle cx="66" cy="86" r="4" fill="#ffb6d9"/><circle cx="134" cy="86" r="4" fill="#ffb6d9"/>
+    <circle cx="88" cy="98" r="6" fill="#5a3b78"/><circle cx="112" cy="98" r="6" fill="#5a3b78"/>
+    <circle cx="86" cy="95" r="2" fill="#fff"/><circle cx="110" cy="95" r="2" fill="#fff"/>
+    <circle cx="78" cy="108" r="5" fill="#ffb6d9" opacity=".7"/><circle cx="122" cy="108" r="5" fill="#ffb6d9" opacity=".7"/>
+    <ellipse cx="118" cy="112" rx="9" ry="8" fill="#c76b8f"/>
   `),
   sceneToothbrush: () => card("#cdeeff", `
-    <g transform="translate(20 20) scale(0.8)">${girlHead("happy")}</g>
-    <rect x="118" y="128" width="60" height="12" rx="6" fill="#7fe0c4" transform="rotate(-20 118 128)"/>
-    <rect x="150" y="108" width="18" height="20" rx="4" fill="#fff" transform="rotate(-20 150 108)"/>
+    <circle cx="100" cy="90" r="34" fill="#ffe3cc"/>
+    <path d="M66 86 Q62 52 100 50 Q138 52 134 86 Q140 66 130 56 Q120 44 100 44 Q80 44 70 56 Q60 66 66 86Z" fill="#7a4a2d"/>
+    <circle cx="64" cy="76" r="10" fill="#7a4a2d"/><circle cx="136" cy="76" r="10" fill="#7a4a2d"/>
+    <circle cx="64" cy="76" r="4" fill="#ffb6d9"/><circle cx="136" cy="76" r="4" fill="#ffb6d9"/>
+    <circle cx="84" cy="88" r="6" fill="#5a3b78"/><circle cx="116" cy="88" r="6" fill="#5a3b78"/>
+    <circle cx="82" cy="85" r="2" fill="#fff"/><circle cx="114" cy="85" r="2" fill="#fff"/>
+    <circle cx="74" cy="96" r="5" fill="#ffb6d9" opacity=".7"/><circle cx="126" cy="96" r="5" fill="#ffb6d9" opacity=".7"/>
+    <ellipse cx="100" cy="108" rx="16" ry="13" fill="#7a4a2d"/>
+    <ellipse cx="100" cy="110" rx="12" ry="9" fill="#fff"/>
+    <rect x="118" y="128" width="66" height="16" rx="7" fill="#7fe0c4" transform="rotate(-32 118 128)"/>
+    <rect x="154" y="104" width="22" height="18" rx="4" fill="#fff" transform="rotate(-32 154 104)"/>
+    <path d="M158 100 l4 -6 M166 104 l5 -6 M172 110 l5 -5" stroke="#fff" stroke-width="3" stroke-linecap="round" transform="rotate(-32 154 104)"/>
+    <circle cx="150" cy="96" r="5" fill="#fff"/><circle cx="160" cy="90" r="4" fill="#fff"/><circle cx="140" cy="100" r="4" fill="#fff"/>
+    <path d="M100 138 Q74 122 78 96" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <path d="M100 138 Q120 148 140 128" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <rect x="70" y="138" width="60" height="42" rx="16" fill="#8fd3ff"/>
   `),
   sceneDressed: () => card("#ffd6f5", `
-    <g transform="translate(20 10) scale(0.8)">${girlHead("happy")}</g>
-    <path d="M60 150 Q100 130 140 150 L150 190 L50 190Z" fill="#ff8fd6"/>
-    <circle cx="100" cy="165" r="6" fill="#fff"/>
+    <path d="M88 186 L88 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <path d="M112 186 L112 160" stroke="#ffe3cc" stroke-width="14" stroke-linecap="round"/>
+    <rect x="76" y="146" width="48" height="46" rx="16" fill="#fff8ea"/>
+    <path d="M80 150 Q58 130 57 80" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <path d="M120 150 Q142 130 143 80" stroke="#ffe3cc" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="122" r="30" fill="#ffe3cc"/>
+    <path d="M72 118 Q68 90 100 88 Q132 90 128 118 Q134 100 124 92 Q114 82 100 82 Q86 82 76 92 Q66 100 72 118Z" fill="#7a4a2d"/>
+    <circle cx="70" cy="110" r="9" fill="#7a4a2d"/><circle cx="130" cy="110" r="9" fill="#7a4a2d"/>
+    <circle cx="70" cy="110" r="3.5" fill="#ffb6d9"/><circle cx="130" cy="110" r="3.5" fill="#ffb6d9"/>
+    <circle cx="90" cy="122" r="5.5" fill="#5a3b78"/><circle cx="110" cy="122" r="5.5" fill="#5a3b78"/>
+    <circle cx="88" cy="119" r="2" fill="#fff"/><circle cx="108" cy="119" r="2" fill="#fff"/>
+    <path d="M90 134 Q100 140 110 134" stroke="#c76b8f" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="80" y="34" width="40" height="32" rx="10" fill="#ff8fd6" stroke="#fff" stroke-width="3"/>
+    <rect x="52" y="38" width="26" height="16" rx="6" fill="#ff8fd6" stroke="#fff" stroke-width="3" transform="rotate(-25 65 46)"/>
+    <rect x="122" y="38" width="26" height="16" rx="6" fill="#ff8fd6" stroke="#fff" stroke-width="3" transform="rotate(25 135 46)"/>
+    <path d="M92 34 L100 46 L108 34" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="57" cy="80" r="8" fill="#ffe3cc"/>
+    <circle cx="143" cy="80" r="8" fill="#ffe3cc"/>
   `),
   sceneSchool: () => card("#d6f5e0", `
-    <g transform="translate(20 15) scale(0.75)">${girlHead("happy")}</g>
-    <rect x="118" y="110" width="46" height="56" rx="10" fill="#ff8fd6"/>
-    <rect x="130" y="120" width="22" height="14" rx="4" fill="#fff8ff"/>
-    <rect x="126" y="140" width="30" height="8" rx="4" fill="#e0579f"/>
+    <path d="M120 176 Q150 170 150 150 Q170 152 168 170 Q160 182 136 182Z" fill="#e0579f"/>
+    <rect x="126" y="114" width="44" height="54" rx="12" fill="#ff8fd6"/>
+    <rect x="136" y="124" width="24" height="16" rx="4" fill="#fff8ff"/>
+    <rect x="132" y="146" width="32" height="8" rx="4" fill="#e0579f"/>
+    <path d="M76 150 L60 178 M124 150 L136 178" stroke="#ffe3cc" stroke-width="13" stroke-linecap="round"/>
+    <rect x="72" y="108" width="56" height="50" rx="16" fill="#8fd3ff"/>
+    <path d="M78 118 Q64 108 68 88" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <path d="M122 118 Q138 126 134 112" stroke="#ffe3cc" stroke-width="11" fill="none" stroke-linecap="round"/>
+    <circle cx="100" cy="72" r="30" fill="#ffe3cc"/>
+    <path d="M70 68 Q66 38 100 36 Q134 38 130 68 Q136 50 126 40 Q116 30 100 30 Q84 30 74 40 Q64 50 70 68Z" fill="#7a4a2d"/>
+    <circle cx="68" cy="60" r="9" fill="#7a4a2d"/><circle cx="132" cy="60" r="9" fill="#7a4a2d"/>
+    <circle cx="68" cy="60" r="3.5" fill="#ffb6d9"/><circle cx="132" cy="60" r="3.5" fill="#ffb6d9"/>
+    <circle cx="88" cy="72" r="5.5" fill="#5a3b78"/><circle cx="112" cy="72" r="5.5" fill="#5a3b78"/>
+    <circle cx="86" cy="69" r="2" fill="#fff"/><circle cx="110" cy="69" r="2" fill="#fff"/>
+    <path d="M88 86 Q100 94 112 86" stroke="#c76b8f" stroke-width="3" fill="none" stroke-linecap="round"/>
   `),
   sceneBath: () => card("#cdeeff", `
-    <path d="M40 150 Q100 175 160 150 L155 165 Q100 188 45 165Z" fill="#8fd3ff"/>
-    <g transform="translate(30 60) scale(0.7)">${girlHead("happy")}</g>
-    <circle cx="150" cy="80" r="8" fill="#fff" opacity=".8"/>
-    <circle cx="165" cy="100" r="5" fill="#fff" opacity=".8"/>
-    <circle cx="145" cy="110" r="6" fill="#fff" opacity=".8"/>
+    <path d="M34 130 Q34 176 100 176 Q166 176 166 130 L156 130 Q156 164 100 164 Q44 164 44 130Z" fill="#8fd3ff"/>
+    <circle cx="70" cy="140" r="9" fill="#fff" opacity=".9"/><circle cx="128" cy="146" r="7" fill="#fff" opacity=".9"/>
+    <circle cx="100" cy="150" r="6" fill="#fff" opacity=".9"/><circle cx="146" cy="126" r="6" fill="#fff" opacity=".9"/>
+    <circle cx="100" cy="112" r="30" fill="#ffe3cc"/>
+    <path d="M70 108 Q66 78 100 76 Q134 78 130 108 Q136 90 126 80 Q116 70 100 70 Q84 70 74 80 Q64 90 70 108Z" fill="#7a4a2d"/>
+    <circle cx="68" cy="100" r="9" fill="#7a4a2d"/><circle cx="132" cy="100" r="9" fill="#7a4a2d"/>
+    <circle cx="88" cy="112" r="5.5" fill="#5a3b78"/><circle cx="112" cy="112" r="5.5" fill="#5a3b78"/>
+    <circle cx="86" cy="109" r="2" fill="#fff"/><circle cx="110" cy="109" r="2" fill="#fff"/>
+    <circle cx="78" cy="122" r="5" fill="#ffb6d9" opacity=".7"/><circle cx="122" cy="122" r="5" fill="#ffb6d9" opacity=".7"/>
+    <path d="M90 128 Q100 134 110 128" stroke="#c76b8f" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="146" cy="148" rx="16" ry="12" fill="#ffc857"/>
+    <ellipse cx="158" cy="140" rx="8" ry="7" fill="#ffc857"/>
+    <circle cx="155" cy="138" r="1.6" fill="#5a3b78"/>
+    <polygon points="150,148 156,146 156,152" fill="#f0a020"/>
   `),
   sceneSleep: () => card("#d8cfff", `
-    <circle cx="150" cy="45" r="20" fill="#fff6c2"/>
-    <circle cx="140" cy="38" r="20" fill="#d8cfff"/>
-    <rect x="40" y="130" width="120" height="34" rx="10" fill="#b47cff"/>
-    <rect x="40" y="110" width="120" height="26" rx="10" fill="#fff"/>
-    <g transform="translate(48 78) scale(0.55)">${girlHead("sleepy")}</g>
-    <path d="M120 60 h14 M128 68 h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="150" cy="42" r="18" fill="#fff6c2"/>
+    <circle cx="141" cy="36" r="18" fill="#d8cfff"/>
+    <text x="130" y="30" font-family="Baloo 2, sans-serif" font-size="14" font-weight="800" fill="#fff">Z</text>
+    <text x="118" y="22" font-family="Baloo 2, sans-serif" font-size="10" font-weight="800" fill="#fff" opacity=".8">z</text>
+    <rect x="30" y="150" width="140" height="16" rx="8" fill="#8a4fe0"/>
+    <ellipse cx="100" cy="140" rx="66" ry="14" fill="#fff"/>
+    <rect x="34" y="108" width="132" height="40" rx="18" fill="#b47cff"/>
+    <circle cx="76" cy="112" r="26" fill="#ffe3cc"/>
+    <path d="M50 108 Q47 84 76 82 Q105 84 102 108" fill="#7a4a2d"/>
+    <circle cx="49" cy="102" r="8" fill="#7a4a2d"/>
+    <path d="M64 116 q6 4 12 0" stroke="#5a3b78" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M84 116 q6 4 12 0" stroke="#5a3b78" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="76" cy="126" rx="6" ry="4" fill="#c76b8f"/>
   `),
 
   // ---- family portraits ----

@@ -9,8 +9,38 @@ export function renderListenAndFind(stage, { unit, game, setProgress, onComplete
   let index = 0;
   let locked = false;
 
-  mascotSay("game-intro-" + game.id, game.intro);
-  playRound();
+  // Teach each word once, low-pressure, before the quiz starts — jumping
+  // straight into testing never actually introduced the vocabulary.
+  const teachKeys = [...new Set(rounds.map((r) => r.correct))];
+  let teachIndex = 0;
+  let teachTimer = null;
+
+  mascotSay("game-intro-" + game.id, "Let's learn some new words first!");
+  setTimeout(playTeach, 1400);
+
+  function playTeach() {
+    const key = teachKeys[teachIndex];
+    const round = rounds.find((r) => r.correct === key);
+    stage.innerHTML = `
+      <div class="teach-card" id="teach-card">${ART[unit.vocab[key].art]()}</div>
+      <div class="teach-hint">👉 Tap to continue</div>
+    `;
+    const card = stage.querySelector("#teach-card");
+    const advance = () => {
+      clearTimeout(teachTimer);
+      teachIndex++;
+      if (teachIndex >= teachKeys.length) {
+        mascotSay("game-quiz-" + game.id, game.intro);
+        setTimeout(playRound, 1600);
+      } else {
+        playTeach();
+      }
+    };
+    card.addEventListener("click", advance);
+    mascotSay("teach-" + key, round.text, { repeat: true, onEnd: () => {
+      teachTimer = setTimeout(advance, 700);
+    } });
+  }
 
   function playRound() {
     locked = false;

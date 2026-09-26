@@ -1,4 +1,4 @@
-const CACHE_NAME = "kingdom-english-v4";
+const CACHE_NAME = "kingdom-english-v5";
 
 const PRECACHE_URLS = [
   "./",

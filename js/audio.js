@@ -46,7 +46,7 @@ function makeUtterance(text, rate, pitch) {
 // language, not a fluent adult listener. `repeat: true` says the phrase
 // twice with a short pause, which helps new vocabulary actually land instead
 // of washing past on a single quick pass.
-function speak(text, { rate = 0.68, pitch = 1.15, repeat = false, onEnd } = {}) {
+function speak(text, { rate = 0.68, pitch = 1.35, repeat = false, onEnd } = {}) {
   if (!("speechSynthesis" in window)) {
     onEnd?.();
     return;
