@@ -48,20 +48,21 @@ self.addEventListener("activate", (event) => {
   );
 });
 
+// Network-first: while she's online, always fetch the live file so app
+// updates show up the moment they're published (no more "why hasn't
+// anything changed" from a stuck cache). Falls back to the cached copy only
+// when the network fails, which is what makes the app work offline.
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached;
-      return fetch(event.request)
-        .then((response) => {
-          if (response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-          }
-          return response;
-        })
-        .catch(() => cached);
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
