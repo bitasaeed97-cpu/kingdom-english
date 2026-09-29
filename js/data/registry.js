@@ -1,16 +1,7 @@
 import dailyRoutine from "./units/dailyRoutine.js";
-import greetings from "./units/greetings.js";
-import family from "./units/family.js";
-import colorsNumbers from "./units/colorsNumbers.js";
-import animals from "./units/animals.js";
-import storyTime from "./units/storyTime.js";
 
-// Add new units here as they're built — the key must match a castle id in castles.js.
+// Only the fully-built units go here. A castle in castles.js with no entry
+// here just shows as a locked "Coming soon" placeholder on the map.
 export const UNIT_CONTENT = {
   "daily-routine": dailyRoutine,
-  greetings,
-  family,
-  "colors-numbers": colorsNumbers,
-  animals,
-  "story-time": storyTime,
 };

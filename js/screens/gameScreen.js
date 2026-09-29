@@ -1,18 +1,22 @@
 import ART from "../art.js";
 import { UNIT_CONTENT } from "../data/registry.js";
-import { renderListenAndFind } from "../games/listenAndFind.js";
+import { renderWordLearn } from "../games/wordLearn.js";
+import { renderWordPractice } from "../games/wordPractice.js";
 import { renderListenAndOrder } from "../games/listenAndOrder.js";
+import { renderConversation } from "../games/conversation.js";
 import { renderJigsaw } from "../games/jigsawPuzzle.js";
 
 const ENGINES = {
-  "listen-and-find": renderListenAndFind,
-  "listen-and-order": renderListenAndOrder,
-  jigsaw: renderJigsaw,
+  "word-learn": renderWordLearn,
+  "word-practice": renderWordPractice,
+  "sentence-build": renderListenAndOrder,
+  conversation: renderConversation,
+  puzzle: renderJigsaw,
 };
 
-export function renderGame(container, castleId, gameId, { onBack, onComplete }) {
+export function renderGame(container, castleId, stepId, { onBack, onComplete }) {
   const unit = UNIT_CONTENT[castleId];
-  const game = unit.games.find((g) => g.id === gameId);
+  const step = unit.steps.find((s) => s.id === stepId);
 
   container.innerHTML = `
     <div class="topbar game-topbar">
@@ -33,6 +37,6 @@ export function renderGame(container, castleId, gameId, { onBack, onComplete }) 
   };
 
   const stage = container.querySelector("#game-stage");
-  const engine = ENGINES[game.type];
-  engine(stage, { unit, game, setProgress, onComplete: () => onComplete(castleId, gameId) });
+  const engine = ENGINES[step.type];
+  engine(stage, { unit, game: step, setProgress, onComplete: () => onComplete(castleId, stepId) });
 }

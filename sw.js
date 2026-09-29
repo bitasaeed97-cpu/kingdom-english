@@ -1,4 +1,4 @@
-const CACHE_NAME = "kingdom-english-v6";
+const CACHE_NAME = "kingdom-english-v7";
 
 const PRECACHE_URLS = [
   "./",
@@ -16,18 +16,15 @@ const PRECACHE_URLS = [
   "./js/data/castles.js",
   "./js/data/registry.js",
   "./js/data/units/dailyRoutine.js",
-  "./js/data/units/greetings.js",
-  "./js/data/units/family.js",
-  "./js/data/units/colorsNumbers.js",
-  "./js/data/units/animals.js",
-  "./js/data/units/storyTime.js",
   "./js/screens/mapScreen.js",
   "./js/screens/castleScreen.js",
   "./js/screens/gameScreen.js",
   "./js/screens/rewardScreen.js",
   "./js/screens/treasureScreen.js",
-  "./js/games/listenAndFind.js",
+  "./js/games/wordLearn.js",
+  "./js/games/wordPractice.js",
   "./js/games/listenAndOrder.js",
+  "./js/games/conversation.js",
   "./js/games/jigsawPuzzle.js",
   "./assets/icons/icon-192.svg",
   "./assets/icons/icon-512.svg",

@@ -15,43 +15,46 @@ export function renderCastle(container, castleId, { onBack, onOpenGame }) {
       <div style="width:64px"></div>
     </div>
     <div class="castle-hero">${ART[castle.art]()}</div>
-    <div class="games-grid" id="games-grid"></div>
+    <div class="steps-path" id="steps-path"></div>
   `;
   container.querySelector("#btn-back").addEventListener("click", onBack);
 
-  const grid = container.querySelector("#games-grid");
+  const path = container.querySelector("#steps-path");
 
   if (!unit) {
-    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;font-weight:800;color:var(--purple-dark);padding-top:30px;">Coming soon! 💫</div>`;
+    path.innerHTML = `<div style="text-align:center;font-weight:800;color:var(--purple-dark);padding-top:30px;">Coming soon! 💫</div>`;
     mascotSay("castle-soon", "This castle is still being built. Check back soon!");
     return;
   }
 
-  unit.games.forEach((game) => {
-    const done = Store.isGameComplete(castleId, game.id);
-    const requires = game.requires || [];
-    const lockedByRequirement = requires.some((req) => !Store.isGameComplete(castleId, req));
+  // A real learning path, not a free-choice grid: step N only opens once
+  // step N-1 is done, so word → sentence → conversation → reward always
+  // happens in that order.
+  let reachedLock = false;
+  unit.steps.forEach((step, i) => {
+    const done = Store.isGameComplete(castleId, step.id);
+    const locked = !done && reachedLock;
+    if (!done) reachedLock = true;
 
     const card = document.createElement("button");
-    card.className = "game-card" + (lockedByRequirement ? " locked" : "");
+    card.className = "step-card" + (locked ? " locked" : "") + (!locked && !done ? " current" : "");
     card.innerHTML = `
-      ${done ? `<div class="done-check">${ART.check()}</div>` : ""}
-      <span class="game-icon">${ART[game.icon]()}</span>
-      <div class="game-name">${game.name}</div>
-      ${lockedByRequirement ? `<div style="position:absolute;top:8px;left:8px;width:22px;height:22px;">${ART.lock()}</div>` : ""}
+      <div class="step-num">${done ? ART.check() : i + 1}</div>
+      <span class="step-icon">${ART[step.icon]()}</span>
+      <div class="step-name">${step.name}</div>
+      ${locked ? `<div class="step-lock">${ART.lock()}</div>` : ""}
     `;
     card.addEventListener("click", () => {
-      if (lockedByRequirement) {
-        mascotSay("game-locked", "Finish the other games first!");
+      if (locked) {
+        mascotSay("step-locked", "Finish the step before this one first!");
         return;
       }
-      onOpenGame(castleId, game.id);
+      onOpenGame(castleId, step.id);
     });
-    grid.appendChild(card);
+    path.appendChild(card);
   });
 
-  // unlock the next castle once every game here is complete
-  const allDone = unit.games.every((g) => Store.isGameComplete(castleId, g.id));
+  const allDone = unit.steps.every((s) => Store.isGameComplete(castleId, s.id));
   if (allDone && castle.unlocksNext && !Store.isCastleUnlocked(castle.unlocksNext)) {
     Store.unlockCastle(castle.unlocksNext);
   }

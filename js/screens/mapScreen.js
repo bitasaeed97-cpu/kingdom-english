@@ -23,7 +23,7 @@ export function renderMap(container, { onOpenCastle, onOpenTreasure }) {
   CASTLES.forEach((castle) => {
     const unlocked = Store.isCastleUnlocked(castle.id);
     const unit = UNIT_CONTENT[castle.id];
-    const total = unit ? unit.games.length : 0;
+    const total = unit ? unit.steps.length : 0;
     const progress = unlocked && unit ? Store.castleProgress(castle.id, total) : { done: 0, total };
     const starsEarned = total ? Math.round((progress.done / total) * 3) : 0;
 

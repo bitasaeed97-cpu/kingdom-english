@@ -4,43 +4,15 @@ import { Sfx } from "../audio.js";
 import { Fx } from "../effects.js";
 import { mascotSay } from "../mascot.js";
 
-export function renderListenAndFind(stage, { unit, game, setProgress, onComplete }) {
+// Step 2: a quick listen-and-touch quiz to reinforce the words she just
+// learned in wordLearn. Comes right after learning, not instead of it.
+export function renderWordPractice(stage, { unit, game, setProgress, onComplete }) {
   const rounds = shuffle(game.rounds);
   let index = 0;
   let locked = false;
 
-  // Teach each word once, low-pressure, before the quiz starts — jumping
-  // straight into testing never actually introduced the vocabulary.
-  const teachKeys = [...new Set(rounds.map((r) => r.correct))];
-  let teachIndex = 0;
-  let teachTimer = null;
-
-  mascotSay("game-intro-" + game.id, "Let's learn some new words first!");
-  setTimeout(playTeach, 1400);
-
-  function playTeach() {
-    const key = teachKeys[teachIndex];
-    const round = rounds.find((r) => r.correct === key);
-    stage.innerHTML = `
-      <div class="teach-card" id="teach-card">${ART[unit.vocab[key].art]()}</div>
-      <div class="teach-hint">👉 Tap to continue</div>
-    `;
-    const card = stage.querySelector("#teach-card");
-    const advance = () => {
-      clearTimeout(teachTimer);
-      teachIndex++;
-      if (teachIndex >= teachKeys.length) {
-        mascotSay("game-quiz-" + game.id, game.intro);
-        setTimeout(playRound, 1600);
-      } else {
-        playTeach();
-      }
-    };
-    card.addEventListener("click", advance);
-    mascotSay("teach-" + key, round.text, { repeat: true, onEnd: () => {
-      teachTimer = setTimeout(advance, 700);
-    } });
-  }
+  mascotSay("practice-intro-" + game.id, game.intro);
+  playRound();
 
   function playRound() {
     locked = false;
@@ -84,7 +56,7 @@ export function renderListenAndFind(stage, { unit, game, setProgress, onComplete
         index++;
         if (index >= rounds.length) {
           setProgress(rounds.length, rounds.length);
-          mascotSay("game-done-" + game.id, "Great listening!");
+          mascotSay("practice-done-" + game.id, "Great listening!");
           setTimeout(onComplete, 1600);
         } else {
           playRound();

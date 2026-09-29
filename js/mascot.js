@@ -1,7 +1,7 @@
 import ART from "./art.js";
 import { Narrator } from "./audio.js";
 
-let wrapEl, bubbleEl, fairyEl;
+let wrapEl, bubbleEl, frogEl;
 let bubbleTimer = null;
 
 export function initMascot() {
@@ -9,15 +9,15 @@ export function initMascot() {
   bubbleEl = document.getElementById("mascot-bubble");
   wrapEl.insertAdjacentHTML(
     "afterbegin",
-    `<div class="mascot-fairy" id="mascot-fairy">${ART.mascotFairy()}</div>`
+    `<div class="mascot-frog" id="mascot-frog">${ART.mascotFrog()}</div>`
   );
-  fairyEl = document.getElementById("mascot-fairy");
+  frogEl = document.getElementById("mascot-frog");
 
   Narrator.onTalking((on) => {
-    fairyEl.classList.toggle("talking", on);
+    frogEl.classList.toggle("talking", on);
   });
 
-  fairyEl.addEventListener("click", () => {
+  frogEl.addEventListener("click", () => {
     Narrator.unlockAudioContext();
   });
 }
